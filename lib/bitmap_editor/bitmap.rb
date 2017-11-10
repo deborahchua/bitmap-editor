@@ -1,4 +1,5 @@
 class Bitmap
+
   def initialize(x, y)
     @x = x
     @y = y
@@ -15,12 +16,6 @@ class Bitmap
 
   def clear!
     create_bitmap
-  end
-
-  def draw_horizontal_segment(x1, x2, y, c)
-    (x1..x2).each do | x |
-      set(x, y, c)
-    end
   end
 
   private
