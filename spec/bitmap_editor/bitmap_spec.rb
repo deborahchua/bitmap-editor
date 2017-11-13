@@ -1,9 +1,9 @@
 require 'spec_helper'
-require './lib/bitmap_editor/bitmap'
+require './lib/bitmap_editor'
 
 module BitmapEditor
   RSpec.describe Bitmap do
-    let(:bitmap) { Bitmap.new(4, 5) }
+    let(:bitmap) { Bitmap.new(3, 4) }
 
     describe '#get' do
       it 'should return the colour of a given coordinate' do

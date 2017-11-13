@@ -1,17 +1,20 @@
 class Bitmap
+  include BitmapEditor
+
+  attr_reader :width, :height, :bitmap
 
   def initialize(x, y)
-    @x = x
-    @y = y
+    @width = x
+    @height = y
     create_bitmap
   end
 
   def get(x, y)
-    @bitmap[y][x]
+    bitmap[y][x]
   end
 
   def set(x, y, c)
-    @bitmap[y][x] = c
+    bitmap[y][x] = c
   end
 
   def clear!
@@ -21,6 +24,6 @@ class Bitmap
   private
 
   def create_bitmap
-    @bitmap = Array.new(@y){Array.new(@x, "O")}
+    @bitmap = Array.new(height){Array.new(width, "O")}
   end
 end
