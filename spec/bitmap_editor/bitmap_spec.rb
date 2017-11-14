@@ -1,5 +1,5 @@
 require 'spec_helper'
-require './lib/bitmap_editor'
+require './lib/bitmap_editor/bitmap'
 
 module BitmapEditor
   RSpec.describe Bitmap do
