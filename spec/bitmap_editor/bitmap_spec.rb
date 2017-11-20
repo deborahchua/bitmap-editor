@@ -1,9 +1,17 @@
 require 'spec_helper'
-require './lib/bitmap_editor/bitmap'
+require 'pry'
 
 module BitmapEditor
   RSpec.describe Bitmap do
-    let(:bitmap) { Bitmap.new(4, 5) }
+    let(:bitmap) { Bitmap.new(3, 4) }
+
+    def expected_equal_bitmap(bitmap, expected)
+      expected.each_with_index do |row, x|
+        row.each_with_index do |column, y|
+          expect(bitmap.get(x, y)).to eql expected[y][x]
+        end
+      end
+    end
 
     describe '#get' do
       it 'should return the colour of a given coordinate' do
@@ -21,6 +29,15 @@ module BitmapEditor
       end
     end
 
+    describe '#show_bitmap' do
+      it 'should output the current bitmap' do
+        expected_output = "\nOOO\nOOO\nOOO\nOOO"
+
+        expect { bitmap.show_bitmap }.to output(expected_output).to_stdout
+
+      end
+    end
+
     describe '#clear!' do
       it 'resets the bitmap to have default colour' do
         bitmap.set(1, 2, 'B')
@@ -28,23 +45,14 @@ module BitmapEditor
         expect(bitmap.get(1, 2)).to eql 'B'
         bitmap.clear!
 
-        expect(bitmap.get(1, 2)).to eql 'O'
-      end
-    end
+        expected = [
+          %w(O O O),
+          %w(O O O),
+          %w(O O O),
+          %w(O O O),
+        ]
 
-    describe '#draw_horizontal_segment' do #X1 X2 Y C
-      it 'fills a horizontal segment with a given colour (inclusively between x1 and x2)' do
-        bitmap.draw_horizontal_segment(1, 3, 2, "A")
-        #  O O O O
-        #  O O O O
-        #  O A A A
-        #  O O O O
-
-        expect(bitmap.get(1, 2)).to eql "A"
-        expect(bitmap.get(2, 2)).to eql "A"
-        expect(bitmap.get(3, 2)).to eql "A"
-
-        expect(bitmap.get(0, 2)).to eql "O"
+        expected_equal_bitmap(bitmap, expected)
       end
     end
   end
