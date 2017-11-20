@@ -20,7 +20,22 @@ module BitmapEditor
       create_bitmap
     end
 
+    def to_s
+      bitmap.map { |row| row.join(" ") }.join("\n")
+    end
 
+    def show_bitmap
+      (0..height - 1).each do | y |
+        (0..width).each do | x |
+            @value = get(x, y)
+          if x == 0
+            print "\n#{@value}"
+          else
+            print "#{@value}"
+          end
+        end
+      end
+    end
 
     def draw_vertical_segment(x, y1, y2, c)
       (y1..y2).each do | y |
