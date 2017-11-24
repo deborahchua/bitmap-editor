@@ -17,12 +17,7 @@ module BitmapEditor
         it 'fills a horizontal segment with a given colour (inclusively between x1 and x2)' do
           command = DrawHorizontalSegment.new(bitmap, 1, 3, 2, "A")
           command.perform
-          #  y
-          #  O O O O
-          #  O O O O
-          #  O A A A
-          #  O O O O
-          #  O O O O x
+          
           expected = [
             %w(O O O O),
             %w(O O O O),
